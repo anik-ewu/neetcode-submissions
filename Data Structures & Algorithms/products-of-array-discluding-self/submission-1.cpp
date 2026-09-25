@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int countZero = 0;
+        long long product = 1;
+
+        for (int num: nums) {
+            if (num == 0) {
+                countZero++;
+                continue;
+            }
+            product *= 1LL * num;
+        }
+
+        int n = nums.size();
+        vector<int>productArray(n, 0);
+        if (countZero > 1) {
+            return productArray;
+        }
+        for (int i = 0; i < n; i++) {
+            if (countZero && nums[i] == 0) {
+                productArray[i] = product;
+            }
+            else if(!countZero) {
+                productArray[i] = product / nums[i];
+            }
+        }
+        return productArray;
+    }
+};
